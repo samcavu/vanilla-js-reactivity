@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanilla JS Reactivity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+        
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+        }
+        
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        
+        .checkbox-group label {
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+        
+        .state-display {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .state-display h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .state-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .state-item:last-child {
+            border-bottom: none;
+        }
+        
+        .state-key {
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .state-value {
+            color: #666;
+            word-break: break-word;
+            max-width: 60%;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Vanilla JS Reactivity Demo</h1>
+        <p class="subtitle">A simple reactive state management system using vanilla JavaScript</p>
+        
+        <form id="reactive-form">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    data-bind="username" 
+                    placeholder="Enter your username"
+                />
+            </div>
+            
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <input 
+                        type="checkbox" 
+                        id="subscribe" 
+                        data-bind="subscribe"
+                    />
+                    <label for="subscribe">Subscribe to newsletter</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="theme">Theme Preference:</label>
+                <select id="theme" data-bind="theme">
+                    <option value="">Select a theme</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="auto">Auto</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="bio">Bio:</label>
+                <textarea 
+                    id="bio" 
+                    data-bind="bio" 
+                    placeholder="Tell us about yourself"
+                ></textarea>
+            </div>
+        </form>
+        
+        <div class="state-display">
+            <h2>Current State (Reactive)</h2>
+            <div class="state-item">
+                <span class="state-key">username:</span>
+                <span class="state-value" data-display="username">""</span>
+            </div>
+            <div class="state-item">
+                <span class="state-key">subscribe:</span>
+                <span class="state-value" data-display="subscribe">false</span>
+            </div>
+            <div class="state-item">
+                <span class="state-key">theme:</span>
+                <span class="state-value" data-display="theme">""</span>
+            </div>
+            <div class="state-item">
+                <span class="state-key">bio:</span>
+                <span class="state-value" data-display="bio">""</span>
+            </div>
+        </div>
+    </div>
+    
+    <script src="reactive.js"></script>
+</body>
+</html>

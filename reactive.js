@@ -161,7 +161,11 @@ function bindDisplayToState(state, selector = 'body') {
     function updateDisplay(element, value) {
         // Format the value for display
         let displayValue;
-        if (typeof value === 'boolean') {
+        if (value === null) {
+            displayValue = 'null';
+        } else if (value === undefined) {
+            displayValue = 'undefined';
+        } else if (typeof value === 'boolean') {
             displayValue = value.toString();
         } else if (value === '') {
             displayValue = '""';
